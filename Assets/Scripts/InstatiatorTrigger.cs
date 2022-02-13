@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorTrigger : MonoBehaviour
+public class InstatiatorTrigger : MonoBehaviour
 {
+    public GameObject instantiator;
     // Start is called before the first frame update
-    public GameObject door;
-    
-
     void Start()
     {
         
@@ -21,13 +19,17 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        door.GetComponent<Door>().opening = true;
-        door.GetComponent<Door>().closing = false;
+        if (other.gameObject.tag == "player")
+        {
+            instantiator.GetComponent<Instantiator>().spawning = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        door.GetComponent<Door>().closing = true;
-        door.GetComponent<Door>().opening = false;
+        if (other.gameObject.tag == "player")
+        {
+            instantiator.GetComponent<Instantiator>().spawning = false;
+        }
     }
 }
