@@ -9,6 +9,9 @@ public class Instantiator : MonoBehaviour
     private float timeElapsed;
     private float timeSnapshot;
 
+    public AudioSource instatiatorActive;
+    public AudioSource spawnedPreFab;
+
     public bool spawning = false;
     // Start is called before the first frame update
     void Start()
@@ -55,6 +58,7 @@ public class Instantiator : MonoBehaviour
         {
             GameObject.Instantiate(PreFab);
             PreFab.transform.position = gameObject.transform.position;
+            spawnedPreFab.Play(0);
             timeSnapshot = Time.time;
             timeElapsed = 0.0f;
         }

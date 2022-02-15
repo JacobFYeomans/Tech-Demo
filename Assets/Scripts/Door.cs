@@ -7,6 +7,9 @@ public class Door : MonoBehaviour
     public bool opening = false;
     public bool closing = false;
 
+    public AudioSource doorOpening;
+    public AudioSource doorClosing;
+
     private float lowestPosition;
     private float highestPosition;
 

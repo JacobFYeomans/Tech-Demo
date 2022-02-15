@@ -22,6 +22,7 @@ public class InstatiatorTrigger : MonoBehaviour
         if (other.gameObject.tag == "player")
         {
             instantiator.GetComponent<Instantiator>().spawning = true;
+            instantiator.GetComponent<Instantiator>().instatiatorActive.Play(0);
         }
     }
 
@@ -30,6 +31,7 @@ public class InstatiatorTrigger : MonoBehaviour
         if (other.gameObject.tag == "player")
         {
             instantiator.GetComponent<Instantiator>().spawning = false;
+            instantiator.GetComponent<Instantiator>().instatiatorActive.Pause();
         }
     }
 }

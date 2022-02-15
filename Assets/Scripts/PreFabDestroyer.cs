@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PreFabDestroyer : MonoBehaviour
 {
-
+    public AudioSource deathCry;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +21,11 @@ public class PreFabDestroyer : MonoBehaviour
     {
         if (other.gameObject.tag == "PreFab")
         {
-            Destroy(other.gameObject);
+            deathCry.Play();
+            if (!deathCry.isPlaying)
+            {
+                Destroy(other.gameObject);
+            }
         }
     }
 }
