@@ -8,10 +8,12 @@ public class GrabFunction : MonoBehaviour
     public GameObject cam;
     public Transform playerTransform;
 
+    public AudioSource pickup;
+    public AudioSource drop;
+
 
     public GameObject grabableCube;
     RaycastHit hit;
-    Ray ray;
 
     private bool isHolding = false;
     private FixedJoint joint;
@@ -49,6 +51,7 @@ public class GrabFunction : MonoBehaviour
                     joint = grabableCube.gameObject.AddComponent<FixedJoint>();
                     joint.connectedBody = player.GetComponent<Rigidbody>();
                     isHolding = true;
+                    pickup.Play();
                     StartCoroutine(wait1());
                     Debug.Log("cube picked up");
                 }
@@ -73,6 +76,7 @@ public class GrabFunction : MonoBehaviour
         grabableCube.GetComponent<Rigidbody>().useGravity = true;
         grabableCube.transform.localRotation = transform.rotation;
         isHolding = false;
+        drop.Play();
         StartCoroutine(wait1());
         Debug.Log("cube dropped");
     }
