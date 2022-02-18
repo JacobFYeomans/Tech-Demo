@@ -22,7 +22,7 @@ public class GrabFunction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //ray = cam.transform.position;
+       
     }
 
     IEnumerator wait1()
@@ -37,17 +37,21 @@ public class GrabFunction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("E Pressed");
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 10.0f)) //transform.position, transform.forward,
+            if (isHolding)
+            {
+                PutDownCube();
+                return;
+            }
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 10.0f))
             {
                 Debug.Log("Rays Casted");
                 // pickup vvv
                 if (!isHolding && (hit.transform.tag == "grabcube"))
                 {
                     grabableCube = hit.transform.gameObject;
-                    grabableCube.transform.position = (player.transform.position + offset);
-                    grabableCube.transform.localRotation = transform.rotation;
+                    grabableCube.transform.position = offset;
                     grabableCube.GetComponent<Rigidbody>().useGravity = false; //use in other places
-                    grabableCube.transform.SetParent(playerTransform);
+                    grabableCube.transform.SetParent(cam.transform);
                     joint = grabableCube.gameObject.AddComponent<FixedJoint>();
                     joint.connectedBody = player.GetComponent<Rigidbody>();
                     isHolding = true;
@@ -55,17 +59,13 @@ public class GrabFunction : MonoBehaviour
                     StartCoroutine(wait1());
                     Debug.Log("cube picked up");
                 }
-                else if (isHolding)
-                {
-                    PutDownCube();
-                }
             }
         }
 
         if (isHolding)
         {
-            grabableCube.transform.position = player.transform.position;
-            grabableCube.transform.localRotation = transform.rotation;
+            grabableCube.transform.position = offset;
+
         }
     }
 
