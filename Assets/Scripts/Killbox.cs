@@ -5,6 +5,7 @@ using UnityEngine;
 public class Killbox : MonoBehaviour
 {
     public GameObject respawnPoint;
+    public GameObject cubeRespawn;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,10 @@ public class Killbox : MonoBehaviour
         if (other.gameObject.CompareTag("player"))
         {
             other.gameObject.transform.position = respawnPoint.transform.position;
+        }
+        else if (other.gameObject.CompareTag("grabcube"))
+        {
+            other.gameObject.transform.position = cubeRespawn.transform.position;
         }
     }
 }
