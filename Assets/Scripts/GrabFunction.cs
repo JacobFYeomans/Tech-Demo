@@ -6,6 +6,7 @@ public class GrabFunction : MonoBehaviour
 {
     public GameObject player;
     public GameObject cam;
+    public GameObject objectHolder;
     public Transform playerTransform;
 
     public AudioSource pickup;
@@ -49,9 +50,9 @@ public class GrabFunction : MonoBehaviour
                 if (!isHolding && (hit.transform.tag == "grabcube"))
                 {
                     grabableCube = hit.transform.gameObject;
-                    grabableCube.transform.position = offset;
+                    grabableCube.transform.position = objectHolder.transform.position;
                     grabableCube.GetComponent<Rigidbody>().useGravity = false; //use in other places
-                    grabableCube.transform.SetParent(cam.transform);
+                    grabableCube.transform.SetParent(objectHolder.transform);
                     joint = grabableCube.gameObject.AddComponent<FixedJoint>();
                     joint.connectedBody = player.GetComponent<Rigidbody>();
                     isHolding = true;
@@ -64,7 +65,8 @@ public class GrabFunction : MonoBehaviour
 
         if (isHolding)
         {
-            grabableCube.transform.position = offset;
+            grabableCube.transform.position = objectHolder.transform.position;
+            grabableCube.transform.localRotation = objectHolder.transform.localRotation;
 
         }
     }

@@ -6,9 +6,12 @@ public class Door : MonoBehaviour
 {
     public bool opening = false;
     public bool closing = false;
+    public bool interrupted = false;
 
     public AudioSource doorOpening;
     public AudioSource doorClosing;
+    public AudioSource doorOpeningEnd;
+    public AudioSource doorClosingEnd;
 
     private float lowestPosition;
     private float highestPosition;
@@ -33,6 +36,12 @@ public class Door : MonoBehaviour
             if (gameObject.transform.position.y >= highestPosition)
             {
                 opening = false;
+                doorOpening.Stop();
+                if (interrupted)
+                {
+                    doorOpeningEnd.Play();
+                    interrupted = false;
+                }
             }
         }
         else if (closing)
@@ -42,6 +51,13 @@ public class Door : MonoBehaviour
             if (gameObject.transform.position.y <= lowestPosition)
             {
                 closing = false;
+                doorClosing.Stop();
+                if (interrupted)
+                {
+                    doorClosingEnd.Play();
+                    interrupted = false;
+                }
+
             }
         }
     }

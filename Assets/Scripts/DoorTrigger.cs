@@ -25,6 +25,10 @@ public class DoorTrigger : MonoBehaviour
         {
             door.GetComponent<Door>().opening = true;
             door.GetComponent<Door>().closing = false;
+            if (door.GetComponent<Door>().doorClosing.isPlaying)
+            {
+                door.GetComponent<Door>().interrupted = true;
+            }
             door.GetComponent<Door>().doorClosing.Stop();
             door.GetComponent<Door>().doorOpening.Play(0);
         }
@@ -36,6 +40,10 @@ public class DoorTrigger : MonoBehaviour
         {
             door.GetComponent<Door>().closing = true;
             door.GetComponent<Door>().opening = false;
+            if (door.GetComponent<Door>().doorOpening.isPlaying)
+            {
+                door.GetComponent<Door>().interrupted = true;
+            }
             door.GetComponent<Door>().doorOpening.Stop();
             door.GetComponent<Door>().doorClosing.Play();
         }
