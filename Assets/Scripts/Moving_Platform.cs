@@ -8,7 +8,6 @@ public class Moving_Platform : MonoBehaviour
 
     public GameObject startPoint;
     public GameObject endPoint;
-    //public GameObject player;
 
     public AudioSource platformMoving;
 
@@ -24,6 +23,9 @@ public class Moving_Platform : MonoBehaviour
     {
         startingPosition = startPoint.transform.position;
         finalPosition = endPoint.transform.position;
+
+
+        //if moveToVector.x > finalPosition.x && moveToVector.y > finalPosition.y && moveToVector.z > finalPosition.z //positive
     }
 
     // Update is called once per frame
@@ -33,9 +35,9 @@ public class Moving_Platform : MonoBehaviour
         {
             if (!moved)
             {
-                moveToVector = movePlatform();
-                Debug.Log(moveToVector);
-                gameObject.transform.Translate(speed * Time.deltaTime, 0, 0);
+                movePlatform();
+
+                gameObject.transform.Translate(moveToVector);
 
                 if (transform.position.x >= finalPosition.x)
                 {
@@ -44,9 +46,9 @@ public class Moving_Platform : MonoBehaviour
             }
             else if (moved)
             {
-                moveToVector = movePlatform();
+                movePlatform();
 
-                gameObject.transform.Translate(-speed * Time.deltaTime, 0, 0); 
+                gameObject.transform.Translate(-moveToVector);
 
                 if (transform.position.x <= startingPosition.x)
                 {
@@ -56,13 +58,14 @@ public class Moving_Platform : MonoBehaviour
         }
     }
 
-    private Vector3 movePlatform()
+    private void movePlatform()
     {
-        if (startingPosition.x <= finalPosition.x)
+        //x value
+        if (startingPosition.x < finalPosition.x)
         {
             moveToVector.x = speed * Time.deltaTime;
         }
-        else if (startingPosition.x >= finalPosition.x)
+        else if (startingPosition.x > finalPosition.x)
         {
             moveToVector.x = -speed * Time.deltaTime;
         }
@@ -70,11 +73,12 @@ public class Moving_Platform : MonoBehaviour
         {
             moveToVector.x = 0;
         }
-        if (startingPosition.y <= finalPosition.y)
+        //y value
+        if (startingPosition.y < finalPosition.y)
         {
             moveToVector.y = speed * Time.deltaTime;
         }
-        else if (startingPosition.y >= finalPosition.y)
+        else if (startingPosition.y > finalPosition.y)
         {
             moveToVector.y = -speed * Time.deltaTime;
         }
@@ -82,11 +86,12 @@ public class Moving_Platform : MonoBehaviour
         {
             moveToVector.y = 0;
         }
-        if (startingPosition.z <= finalPosition.z)
+        //z value
+        if (startingPosition.z < finalPosition.z)
         {
             moveToVector.z = speed * Time.deltaTime;
         }
-        else if (startingPosition.z >= finalPosition.z)
+        else if (startingPosition.z > finalPosition.z)
         {
             moveToVector.z = -speed * Time.deltaTime;
         }
@@ -94,7 +99,5 @@ public class Moving_Platform : MonoBehaviour
         {
             moveToVector.z = 0;
         }
-
-        return moveToVector;
     }
 }
