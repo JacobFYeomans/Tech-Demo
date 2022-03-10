@@ -15,8 +15,8 @@ public class Moving_Platform : MonoBehaviour
     private Vector3 finalPosition;
     private Vector3 moveToVector = new Vector3(0f, 0f, 0f);
 
-    public bool moving = false;
-    private bool moved = false;
+    public bool moving = false; //standing on platform
+    private bool moved = false; //reached destination
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +26,7 @@ public class Moving_Platform : MonoBehaviour
 
 
         //if moveToVector.x > finalPosition.x && moveToVector.y > finalPosition.y && moveToVector.z > finalPosition.z //positive
+        //abs value = 6 checks, greater or less then in X, Y, and Z
     }
 
     // Update is called once per frame
