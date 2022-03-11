@@ -11,6 +11,10 @@ public class Pickup : MonoBehaviour
     private float currentTime;
 
     public bool respawnable;
+    private bool playOnce = false;
+
+    public AudioSource pickedUpSFX;
+    public AudioSource respawnedSFX;
     
     // Start is called before the first frame update
     void Start()
@@ -31,6 +35,11 @@ public class Pickup : MonoBehaviour
             {
                 this.gameObject.GetComponent<BoxCollider>().enabled = true;
                 this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                if (playOnce)
+                {
+                    respawnedSFX.Play();
+                    playOnce = false;
+                }
             }
         }
     }
@@ -40,9 +49,11 @@ public class Pickup : MonoBehaviour
         if (other.gameObject.CompareTag("player"))
         {
             score++;
+            pickedUpSFX.Play();
             this.gameObject.GetComponent<BoxCollider>().enabled = false;
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
             currentTime = Time.time;
+            playOnce = true;
         }
     }
 }

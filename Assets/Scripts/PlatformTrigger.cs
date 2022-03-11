@@ -25,6 +25,7 @@ public class PlatformTrigger : MonoBehaviour
         if (other.gameObject.tag == "player")
         {
             platform.GetComponent<Moving_Platform>().moving = true;
+            platform.GetComponent<Moving_Platform>().isMoving.Play();
             player.transform.parent = transform;
         }
     }
@@ -34,6 +35,7 @@ public class PlatformTrigger : MonoBehaviour
         if (other.gameObject.tag == "player")
         {
             platform.GetComponent<Moving_Platform>().moving = false;
+            platform.GetComponent<Moving_Platform>().isMoving.Stop();
             player.transform.parent = null;
         }
     }

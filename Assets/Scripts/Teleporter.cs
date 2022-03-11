@@ -6,6 +6,8 @@ public class Teleporter : MonoBehaviour
 {
     public GameObject destination;
 
+    public AudioSource teleportSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class Teleporter : MonoBehaviour
         if (other.gameObject.tag == ("player"))
         {
             other.gameObject.transform.position = destination.transform.position;
+            teleportSFX.Play();
         }
     }
 }

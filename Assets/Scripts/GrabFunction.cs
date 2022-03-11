@@ -77,6 +77,7 @@ public class GrabFunction : MonoBehaviour
         grabableCube.transform.parent = null;
         grabableCube.GetComponent<Rigidbody>().useGravity = true;
         grabableCube.transform.localRotation = transform.rotation;
+        grabableCube.transform.position = grabableCube.transform.position;
         isHolding = false;
         drop.Play();
         StartCoroutine(wait1());

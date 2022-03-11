@@ -9,14 +9,14 @@ public class Moving_Platform : MonoBehaviour
     public GameObject startPoint;
     public GameObject endPoint;
 
-    public AudioSource platformMoving;
-
     private Vector3 startingPosition;
     private Vector3 finalPosition;
     private Vector3 moveToVector = new Vector3(0f, 0f, 0f);
 
     public bool moving = false; //standing on platform
     private bool moved = false; //reached destination
+
+    public AudioSource isMoving;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +34,7 @@ public class Moving_Platform : MonoBehaviour
     {
         if (moving)
         {
+
             if (!moved)
             {
                 movePlatform();
